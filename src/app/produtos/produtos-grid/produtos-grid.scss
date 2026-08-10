@@ -1,0 +1,29 @@
+.campo-pesquisa {
+  width: 100%;
+  max-width: 400px;
+  margin: 16px;
+}
+.grid-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  justify-items: center; // centraliza cada card dentro da sua célula do grid
+  gap: 16px;
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  app-produto-card {
+    display: block;
+    width: 100%;
+    max-width: 280px; // trava um teto, pra não esticar demais quando sobra espaço
+  }
+}
+// Média query: quando a tela for MENOR que 480px (celular)
+@media (max-width: 480px) {
+  .grid-produtos {
+    app-produto-card {
+      flex: 1 1 100%; // ocupa a largura toda, um card por linha
+      max-width: 100%;
+    }
+  }
+}

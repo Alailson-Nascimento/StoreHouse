@@ -1,0 +1,33 @@
+<form [formGroup]="produtoForm" class="produto-form">
+  <label for="nome">Nome</label>
+  <input id="nome" formControlName="nome" type="text" />
+  @if (produtoForm.controls.nome.invalid && produtoForm.controls.nome.touched) {
+    <span class="erro">Nome é obrigatório (mín. 3 caracteres).</span>
+  }
+
+  <label for="descricao">Descrição</label>
+  <textarea id="descricao" formControlName="descricao"></textarea>
+  @if (produtoForm.controls.descricao.hasError('minlength')) {
+    <span class="erro">Descrição precisa de pelo menos 20 caracteres.</span>
+  }
+
+  <label for="categoria">Categoria</label>
+  <input id="categoria" formControlName="categoria" type="text" />
+  @if (produtoForm.controls.categoria.invalid && produtoForm.controls.categoria.touched) {
+    <span class="erro">Categoria é obrigatória.</span>
+  }
+
+  <label for="preco">Preço</label>
+  <input id="preco" formControlName="preco" type="number" />
+  @if (produtoForm.controls.preco.hasError('min')) {
+    <span class="erro">Preço deve ser maior que zero.</span>
+  }
+
+  <label for="estoque">Estoque</label>
+  <input id="estoque" formControlName="estoque" type="number" />
+
+  <label for="imagem">URL da imagem</label>
+  <input id="imagem" formControlName="imagem" type="text" />
+
+  <button type="button" [disabled]="produtoForm.invalid" (click)="salvarProduto()">Salvar</button>
+</form>

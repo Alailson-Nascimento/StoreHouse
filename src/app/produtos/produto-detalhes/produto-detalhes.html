@@ -1,0 +1,27 @@
+@if (produto) {
+  <div class="detalhes-produto">
+    <a routerLink="/" class="voltar">← Voltar aos produtos</a>
+
+    <div class="conteudo">
+      <img [src]="produto.imagem" [alt]="produto.nome" />
+
+      <div class="info">
+        <h1>{{ produto.nome }}</h1>
+        <p class="descricao">{{ produto.descricao }}</p>
+        <p class="preco">R$ {{ produto.preco.toFixed(2) }}</p>
+        <p class="categoria">Categoria: {{ produto.categoria }}</p>
+
+        @if (produto.estoque > 0) {
+          <p class="disponivel">Disponível ({{ produto.estoque }} unid.)</p>
+        } @else {
+          <p class="esgotado">Esgotado</p>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="nao-encontrado">
+    <h2>Produto não encontrado.</h2>
+    <a routerLink="/" class="voltar">← Voltar aos produtos</a>
+  </div>
+}
