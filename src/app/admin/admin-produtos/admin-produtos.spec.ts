@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { CarrinhoResumo } from './carrinho-resumo';
+import { AdminProdutos } from './admin-produtos';
 
-describe('CarrinhoResumo', () => {
-  let component: CarrinhoResumo;
-  let fixture: ComponentFixture<CarrinhoResumo>;
+describe('AdminProdutos', () => {
+  let component: AdminProdutos;
+  let fixture: ComponentFixture<AdminProdutos>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CarrinhoResumo],
+      imports: [AdminProdutos],
       providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CarrinhoResumo);
+    fixture = TestBed.createComponent(AdminProdutos);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

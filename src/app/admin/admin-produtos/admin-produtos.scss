@@ -1,0 +1,191 @@
+.admin-produtos {
+  padding: 20px;
+  color: #f0f0f0;
+  overflow-x: hidden;
+
+  .voltar {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 13px;
+
+    &:hover {
+      color: #ffd700;
+    }
+  }
+
+  .topo-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .botao-novo {
+      background-color: #4caf50;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #388e3c;
+      }
+    }
+  }
+
+  .tabela-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabela-produtos {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+
+    th,
+    td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #2a2a2a;
+      font-size: 13px;
+    }
+
+    th {
+      background-color: #2a2a2a;
+      color: #b0b0b0;
+      font-weight: 500;
+    }
+
+    .linha-oculta {
+      opacity: 0.5;
+    }
+
+    .preco-antigo {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 12px;
+      margin-right: 8px;
+    }
+
+    .preco-promo {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-right: 4px;
+    }
+
+    .tag-oculto {
+      background-color: #555;
+      color: white;
+    }
+
+    .tag-promocao {
+      background-color: #ff9800;
+      color: black;
+    }
+
+    .acoes {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn-acao {
+      padding: 4px 8px;
+      border: none;
+      border-radius: 4px;
+      background-color: #3f51b5;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #303f9f;
+      }
+    }
+
+    .btn-excluir {
+      background-color: #f44336;
+
+      &:hover {
+        background-color: #d32f2f;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .topo-admin {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .tabela-scroll {
+      overflow-x: visible;
+    }
+
+    .tabela-produtos {
+      min-width: 0;
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        display: block;
+        margin-bottom: 12px;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        padding: 8px;
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #2a2a2a;
+        padding: 8px 4px;
+
+        &::before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #b0b0b0;
+          margin-right: 8px;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      .acoes {
+        flex-direction: column;
+        align-items: stretch;
+
+        &::before {
+          margin-bottom: 6px;
+        }
+
+        .btn-acao {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

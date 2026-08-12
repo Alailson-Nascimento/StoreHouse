@@ -1,15 +1,31 @@
-<div class="card-produto">
+<div class="card-produto" [class]="'status-' + status()">
+  @if (produto().emPromocao) {
+    <span class="tag-promocao">Promoção</span>
+  }
+
   <img [src]="produto().imagem" [alt]="produto().nome" />
   <h3>{{ produto().nome }}</h3>
   <p>{{ produto().descricao }}</p>
-  <p class="preco">R$ {{ produto().preco.toFixed(2) }}</p>
 
-  @if (produto().estoque > 0) {
-    <p class="disponivel">Disponível ({{ produto().estoque }} unid.)</p>
-    <button (click)="aoClicarAdicionar()">Adicionar ao Carrinho</button>
-  } @else {
+  <p class="preco">
+    @if (produto().emPromocao) {
+      <span class="preco-antigo">R$ {{ produto().preco.toFixed(2) }}</span>
+      <span class="preco-novo">R$ {{ precoExibido().toFixed(2) }}</span>
+    } @else {
+      R$ {{ precoExibido().toFixed(2) }}
+    }
+  </p>
+
+  @if (status() === 'sem-estoque') {
     <p class="esgotado">Esgotado</p>
-    <button disabled>Indisponível</button>
+    <button (click)="aoClicarAvisar()">Me avise quando tiver em estoque</button>
+  } @else {
+    @if (status() === 'estoque-baixo') {
+      <p class="estoque-baixo">Últimas unidades! ({{ produto().estoque }} em estoque)</p>
+    } @else {
+      <p class="disponivel">Disponível ({{ produto().estoque }} unid.)</p>
+    }
+    <button (click)="aoClicarAdicionar()">Adicionar ao Carrinho</button>
   }
 
   <a [routerLink]="['/produtos', produto().id]" class="ver-detalhes">Ver detalhes</a>

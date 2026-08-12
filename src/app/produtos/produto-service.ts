@@ -1,24 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { Produto } from './produto';
-// Classe que pode ser injetada em qual quer componente da aplicação
+
 @Injectable({
   providedIn: 'root',
 })
-// Crie uma propriedade chamada produtos, que só existe dentro dessa classe (private)
-// que nunca vai ser trocada por outra coisa (readonly
-// uma caixa reativa (signal) contendo especificamente um array de objetos do tipo Produto (<Produto[]>),
-// já inicializada com essa lista de 9 jogos
-// reandonly Impede que a variável receba outro valor
-// O Signal é uma forma moderna do Angular guardar dados reativos.
-
-// Sempre que a lista mudar, a tela será atualizada automaticamente
 export class ProdutoService {
-  listar() {
-    throw new Error('Método não implementado');
-  }
-  adicionar(produto: Produto) {
-    this.produtos.update((lista) => [...lista, produto]);
-  }
   private readonly produtos = signal<Produto[]>([
     {
       id: 1,
@@ -28,6 +14,8 @@ export class ProdutoService {
       preco: 89.9,
       imagem: 'img/gta.png',
       estoque: 10,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 2,
@@ -37,6 +25,8 @@ export class ProdutoService {
       preco: 149.9,
       imagem: 'img/resident-evil.png',
       estoque: 6,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 3,
@@ -46,6 +36,8 @@ export class ProdutoService {
       preco: 199.9,
       imagem: 'img/god-of-war-ragnarok.png',
       estoque: 0,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 4,
@@ -55,6 +47,8 @@ export class ProdutoService {
       preco: 179.9,
       imagem: 'img/mortal-kombat.png',
       estoque: 8,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 5,
@@ -64,6 +58,8 @@ export class ProdutoService {
       preco: 69.9,
       imagem: 'img/tomb-raider.png',
       estoque: 4,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 6,
@@ -73,6 +69,8 @@ export class ProdutoService {
       preco: 159.9,
       imagem: 'img/the-last-of-us.png',
       estoque: 0,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 7,
@@ -82,6 +80,8 @@ export class ProdutoService {
       preco: 229.9,
       imagem: 'img/elden-ring.png',
       estoque: 15,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 8,
@@ -91,6 +91,8 @@ export class ProdutoService {
       preco: 129.9,
       imagem: 'img/cyberpunk-2077.png',
       estoque: 2,
+      oculto: false,
+      emPromocao: false,
     },
     {
       id: 9,
@@ -100,13 +102,44 @@ export class ProdutoService {
       preco: 99.9,
       imagem: 'img/red-dead-2.png',
       estoque: 12,
+      oculto: false,
+      emPromocao: false,
     },
   ]);
 
-  // método público que os componentes vão chamar pra pegar a lista
-  // Serve para devolver a lista
-  // Em vez de devolver o signal original, ele devolve uma versão somente para leitura
   obterProdutos() {
     return this.produtos.asReadonly();
+  }
+
+  readonly produtosVisiveis = computed(() => this.produtos().filter((produto) => !produto.oculto));
+
+  adicionar(produto: Produto) {
+    this.produtos.update((lista) => [...lista, produto]);
+  }
+
+  editar(produtoId: number, dados: Partial<Produto>) {
+    this.produtos.update((lista) =>
+      lista.map((produto) => (produto.id === produtoId ? { ...produto, ...dados } : produto)),
+    );
+  }
+
+  excluir(produtoId: number) {
+    this.produtos.update((lista) => lista.filter((produto) => produto.id !== produtoId));
+  }
+
+  alternarOculto(produtoId: number) {
+    this.produtos.update((lista) =>
+      lista.map((produto) =>
+        produto.id === produtoId ? { ...produto, oculto: !produto.oculto } : produto,
+      ),
+    );
+  }
+
+  definirPromocao(produtoId: number, emPromocao: boolean, precoPromocional?: number) {
+    this.produtos.update((lista) =>
+      lista.map((produto) =>
+        produto.id === produtoId ? { ...produto, emPromocao, precoPromocional } : produto,
+      ),
+    );
   }
 }

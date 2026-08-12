@@ -1,4 +1,4 @@
-.produto-form {
+.checkout-form {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -9,6 +9,10 @@
   color: #f0f0f0;
   border-radius: 10px;
 
+  h2 {
+    margin: 0 0 12px;
+  }
+
   label {
     font-size: 13px;
     color: #b0b0b0;
@@ -16,14 +20,13 @@
   }
 
   input,
-  textarea {
+  select {
     padding: 8px;
     border-radius: 6px;
     border: 1px solid #333;
     background-color: #2a2a2a;
     color: #f0f0f0;
     font-size: 14px;
-    font-family: inherit;
 
     &:focus {
       outline: none;
@@ -31,17 +34,12 @@
     }
   }
 
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-
   .erro {
     color: #f44336;
     font-size: 12px;
   }
 
-  button {
+  button[type='submit'] {
     margin-top: 16px;
     padding: 10px;
     border: none;
@@ -59,6 +57,25 @@
       background-color: #444;
       color: #888;
       cursor: not-allowed;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .item-carrinho {
+      flex-wrap: wrap;
+      row-gap: 8px;
+
+      span:first-child {
+        flex-basis: 100%;
+      }
+    }
+
+    .acoes-carrinho {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
     }
   }
 }

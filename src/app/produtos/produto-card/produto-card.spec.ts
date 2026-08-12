@@ -14,7 +14,6 @@ describe('ProdutoCard', () => {
 
     fixture = TestBed.createComponent(ProdutoCard);
 
-    // 👇 precisa setar o input obrigatório antes do detectChanges
     fixture.componentRef.setInput('produto', {
       id: 1,
       nome: 'Produto Teste',

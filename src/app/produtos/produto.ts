@@ -7,4 +7,7 @@ export interface Produto {
   preco: number;
   imagem: string;
   estoque: number;
+  oculto: boolean;
+  emPromocao: boolean;
+  precoPromocional?: number;
 }

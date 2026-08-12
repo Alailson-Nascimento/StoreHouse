@@ -6,7 +6,11 @@
 
 <div class="grid-produtos">
   @for (produto of produtosFiltrados(); track produto.id) {
-    <app-produto-card [produto]="produto" (adicionarAoCarrinho)="aoAdicionarCarrinho($event)">
+    <app-produto-card
+      [produto]="produto"
+      (adicionarAoCarrinho)="aoAdicionarCarrinho($event)"
+      (avisarQuandoDisponivel)="aoAvisarQuandoDisponivel($event)"
+    >
     </app-produto-card>
   } @empty {
     <p>Nenhum jogo encontrado.</p>

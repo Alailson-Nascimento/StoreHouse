@@ -10,6 +10,11 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+  transition:
+    border-color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.15s ease;
 
   img {
     width: 100%;
@@ -30,14 +35,47 @@
     color: #b0b0b0;
   }
 
+  .tag-promocao {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #ff9800;
+    color: black;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
   .preco {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
     font-weight: bold;
     color: #ffd700;
     font-size: 15px;
   }
 
+  .preco-antigo {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 12px;
+  }
+
+  .preco-novo {
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
   .disponivel {
     color: #4caf50;
+    font-weight: 500;
+  }
+
+  .estoque-baixo {
+    color: #ff9800;
     font-weight: 500;
   }
 
@@ -77,5 +115,19 @@
     &:hover {
       color: #ffd700;
     }
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  &.status-estoque-baixo {
+    border-color: #ff9800;
+  }
+
+  &.status-sem-estoque {
+    opacity: 0.7;
+    border-color: #f44336;
   }
 }

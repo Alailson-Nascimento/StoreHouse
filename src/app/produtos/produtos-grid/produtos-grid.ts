@@ -19,7 +19,7 @@ export class ProdutosGrid {
   private readonly produtoService = inject(ProdutoService);
   private readonly carrinhoService = inject(CarrinhoService);
 
-  protected readonly produtos = this.produtoService.obterProdutos();
+  protected readonly produtos = this.produtoService.produtosVisiveis;
   protected readonly pesquisaDigitada = signal('');
 
   protected readonly produtosFiltrados = computed(() => {
@@ -34,5 +34,9 @@ export class ProdutosGrid {
 
   protected aoAdicionarCarrinho(produto: Produto) {
     this.carrinhoService.adicionarProduto(produto);
+  }
+
+  protected aoAvisarQuandoDisponivel(produto: Produto) {
+    alert(`Você será avisado quando "${produto.nome}" voltar ao estoque.`);
   }
 }

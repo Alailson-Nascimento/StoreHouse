@@ -1,0 +1,58 @@
+<div class="admin-produtos">
+  <a routerLink="/produtos" class="voltar">← Voltar aos produtos</a>
+
+  <div class="topo-admin">
+    <h2>Administração de Produtos</h2>
+    <a routerLink="/produtos/novo" class="botao-novo">+ Novo Produto</a>
+  </div>
+
+  <div class="tabela-scroll">
+    <table class="tabela-produtos">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Categoria</th>
+          <th>Preço</th>
+          <th>Estoque</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (produto of produtos(); track produto.id) {
+          <tr [class.linha-oculta]="produto.oculto">
+            <td data-label="Nome">{{ produto.nome }}</td>
+            <td data-label="Categoria">{{ produto.categoria }}</td>
+            <td data-label="Preço">
+              @if (produto.emPromocao) {
+                <span class="preco-antigo">R$ {{ produto.preco.toFixed(2) }}</span>
+                <span class="preco-promo">R$ {{ produto.precoPromocional?.toFixed(2) }}</span>
+              } @else {
+                R$ {{ produto.preco.toFixed(2) }}
+              }
+            </td>
+            <td data-label="Estoque">{{ produto.estoque }}</td>
+            <td data-label="Status">
+              @if (produto.oculto) {
+                <span class="tag tag-oculto">Oculto</span>
+              }
+              @if (produto.emPromocao) {
+                <span class="tag tag-promocao">Promoção</span>
+              }
+            </td>
+            <td data-label="Ações" class="acoes">
+              <a [routerLink]="['/produtos/editar', produto.id]" class="btn-acao">Editar</a>
+              <button (click)="alternarOculto(produto)" class="btn-acao">
+                {{ produto.oculto ? 'Exibir' : 'Ocultar' }}
+              </button>
+              <button (click)="alternarPromocao(produto)" class="btn-acao">
+                {{ produto.emPromocao ? 'Remover Promoção' : 'Promoção' }}
+              </button>
+              <button (click)="excluir(produto)" class="btn-acao btn-excluir">Excluir</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

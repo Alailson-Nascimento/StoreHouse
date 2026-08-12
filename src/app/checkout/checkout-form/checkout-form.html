@@ -1,0 +1,56 @@
+<form [formGroup]="checkoutFormGroup" (ngSubmit)="finalizarCompra()" class="checkout-form">
+  <h2>Finalizar Compra</h2>
+
+  <label for="nome">Nome completo</label>
+  <input id="nome" formControlName="nome" type="text" />
+  @if (checkoutFormGroup.controls.nome.invalid && checkoutFormGroup.controls.nome.touched) {
+    <span class="erro">Nome é obrigatório (mín. 3 caracteres).</span>
+  }
+
+  <label for="cpf">CPF</label>
+  <input id="cpf" formControlName="cpf" type="text" placeholder="000.000.000-00" />
+  @if (checkoutFormGroup.controls.cpf.touched) {
+    @if (checkoutFormGroup.controls.cpf.hasError('required')) {
+      <span class="erro">CPF é obrigatório.</span>
+    } @else if (checkoutFormGroup.controls.cpf.hasError('cpfInvalido')) {
+      <span class="erro">CPF inválido.</span>
+    }
+  }
+
+  <label for="email">E-mail</label>
+  <input id="email" formControlName="email" type="email" />
+  @if (checkoutFormGroup.controls.email.touched) {
+    @if (checkoutFormGroup.controls.email.hasError('required')) {
+      <span class="erro">E-mail é obrigatório.</span>
+    } @else if (checkoutFormGroup.controls.email.hasError('email')) {
+      <span class="erro">E-mail inválido.</span>
+    }
+  }
+
+  <label for="endereco">Endereço completo</label>
+  <input
+    id="endereco"
+    formControlName="endereco"
+    type="text"
+    placeholder="Rua, número, bairro, cidade"
+  />
+  @if (checkoutFormGroup.controls.endereco.invalid && checkoutFormGroup.controls.endereco.touched) {
+    <span class="erro">Endereço precisa ter pelo menos 10 caracteres.</span>
+  }
+
+  <label for="metodoPagamento">Método de pagamento</label>
+  <select id="metodoPagamento" formControlName="metodoPagamento">
+    <option value="">Selecione...</option>
+    <option value="cartao">Cartão de crédito</option>
+    <option value="pix">Pix</option>
+    <option value="boleto">Boleto</option>
+  </select>
+  @if (
+    checkoutFormGroup.controls.metodoPagamento.invalid &&
+    checkoutFormGroup.controls.metodoPagamento.touched
+  ) {
+    <span class="erro">Selecione um método de pagamento.</span>
+  }
+
+  <button type="submit" [disabled]="checkoutFormGroup.invalid">Finalizar Compra</button>
+</form>
