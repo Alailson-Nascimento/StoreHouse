@@ -4,8 +4,8 @@ E-commerce fictício com temática de jogos, desenvolvido como projeto prático 
 
 ## 🔗 Links
 
-- **Repositório:** [https://github.com/Alailson-Nascimento]
-- **Aplicação publicada:** [link do Netlify aqui]
+- **Repositório:** https://github.com/Alailson-Nascimento
+- **Aplicação publicada:** https://storehouse-jogos.netlify.app/produtos
 
 ## 🛠️ Tecnologias utilizadas
 
