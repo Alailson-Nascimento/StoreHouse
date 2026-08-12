@@ -25,8 +25,6 @@ export class CarrinhoService {
   );
 
   constructor() {
-    // effect: roda automaticamente toda vez que `itens` mudar, salvando no localStorage.
-    // Não precisamos chamar isso manualmente em cada método.
     effect(() => {
       localStorage.setItem(CARRINHO_KEY, JSON.stringify(this.itens()));
     });
@@ -46,6 +44,9 @@ export class CarrinhoService {
       const itemExistente = listaAtual.find((item) => item.produto.id === produto.id);
 
       if (itemExistente) {
+        if (itemExistente.quantidade >= produto.estoque) {
+          return listaAtual;
+        }
         return listaAtual.map((item) =>
           item.produto.id === produto.id ? { ...item, quantidade: item.quantidade + 1 } : item,
         );
@@ -57,9 +58,11 @@ export class CarrinhoService {
 
   aumentarQuantidade(produtoId: number) {
     this.itens.update((listaAtual) =>
-      listaAtual.map((item) =>
-        item.produto.id === produtoId ? { ...item, quantidade: item.quantidade + 1 } : item,
-      ),
+      listaAtual.map((item) => {
+        if (item.produto.id !== produtoId) return item;
+        if (item.quantidade >= item.produto.estoque) return item;
+        return { ...item, quantidade: item.quantidade + 1 };
+      }),
     );
   }
 
