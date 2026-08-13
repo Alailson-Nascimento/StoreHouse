@@ -13,8 +13,10 @@
 
         @if (produto.estoque > 0) {
           <p class="disponivel">Disponível ({{ produto.estoque }} unid.)</p>
+          <button (click)="comprar()">Comprar</button>
         } @else {
           <p class="esgotado">Esgotado</p>
+          <button disabled>Comprar</button>
         }
       </div>
     </div>

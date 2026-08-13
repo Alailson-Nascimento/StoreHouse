@@ -67,6 +67,29 @@
         color: #f44336;
         font-weight: 500;
       }
+
+      button {
+        margin-top: 12px;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 6px;
+        background-color: #4caf50;
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+        align-self: flex-start;
+
+        &:hover:not(:disabled) {
+          background-color: #388e3c;
+        }
+
+        &:disabled {
+          background-color: #444;
+          color: #888;
+          cursor: not-allowed;
+        }
+      }
     }
   }
 
@@ -81,6 +104,11 @@
         width: 100%;
         height: auto;
         aspect-ratio: 1 / 1;
+      }
+
+      .info button {
+        align-self: stretch;
+        text-align: center;
       }
     }
   }

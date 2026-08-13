@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { cpfValidator } from '../valida-cpf';
 import { Pedido } from '../pedido';
+import { CarrinhoService } from '../../carrinho/carrinho-service';
 
 @Component({
   selector: 'app-checkout-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './checkout-form.html',
   styleUrl: './checkout-form.scss',
 })
 export class CheckoutForm {
   private readonly fb = new FormBuilder();
+  private readonly carrinhoService = inject(CarrinhoService);
+  private readonly router = inject(Router);
 
   protected readonly checkoutFormGroup = this.fb.group({
     nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -31,6 +35,9 @@ export class CheckoutForm {
 
     console.log('Pedido finalizado:', pedido);
     alert('Compra finalizada com sucesso! (simulação, sem backend)');
+
     this.checkoutFormGroup.reset();
+    this.carrinhoService.limparCarrinho();
+    this.router.navigate(['/produtos']);
   }
 }

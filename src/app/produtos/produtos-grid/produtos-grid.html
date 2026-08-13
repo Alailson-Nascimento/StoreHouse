@@ -13,6 +13,10 @@
     >
     </app-produto-card>
   } @empty {
-    <p>Nenhum jogo encontrado.</p>
+    <div class="estado-vazio">
+      <mat-icon>search_off</mat-icon>
+      <p>Nenhum jogo encontrado para "{{ pesquisaDigitada() }}"</p>
+      <button mat-stroked-button (click)="limparPesquisa()">Limpar busca</button>
+    </div>
   }
 </div>

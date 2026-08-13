@@ -39,4 +39,8 @@ export class ProdutosGrid {
   protected aoAvisarQuandoDisponivel(produto: Produto) {
     alert(`Você será avisado quando "${produto.nome}" voltar ao estoque.`);
   }
+
+  protected limparPesquisa() {
+    this.pesquisaDigitada.set('');
+  }
 }

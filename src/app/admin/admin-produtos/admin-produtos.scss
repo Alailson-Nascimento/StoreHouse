@@ -128,7 +128,6 @@
       }
     }
   }
-
   @media (max-width: 600px) {
     .topo-admin {
       flex-direction: column;
@@ -175,15 +174,44 @@
       }
 
       .acoes {
-        flex-direction: column;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
 
         &::before {
-          margin-bottom: 6px;
+          content: none;
         }
 
         .btn-acao {
           text-align: center;
+          background-color: transparent;
+          border: 1px solid #3f51b5;
+          color: #7986cb;
+
+          &:hover {
+            background-color: rgba(63, 81, 181, 0.15);
+          }
+        }
+
+        a.btn-acao {
+          grid-column: 1 / -1;
+          background-color: #3f51b5;
+          border: none;
+          color: white;
+
+          &:hover {
+            background-color: #303f9f;
+          }
+        }
+
+        .btn-excluir {
+          background-color: transparent;
+          border: 1px solid #f44336;
+          color: #f44336;
+
+          &:hover {
+            background-color: rgba(244, 67, 54, 0.15);
+          }
         }
       }
     }
